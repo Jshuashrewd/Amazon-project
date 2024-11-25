@@ -3,10 +3,7 @@ import { getProduct, products } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.13/+esm'
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
-
-const today = dayjs();
-const deliveryDate = today.add(7, 'days');
-console.log(deliveryDate.format('dddd, MMMM D'));
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary() {
 
@@ -109,14 +106,18 @@ export function renderOrderSummary() {
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
+
+      renderPaymentSummary();
     });
   });
 
-  document.querySelectorAll('.js-delivery-option').forEach((element)=>{
+  document.querySelectorAll('.js-delivery-option').forEach((element)=>  {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+
+      renderPaymentSummary();
     });
   });
 
