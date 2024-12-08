@@ -5,13 +5,13 @@ import { renderPaymentSummary } from "./Checkout/paymentSummary.js";
 //import '../data/cart-class.js';
 
 async function loadPage() {
-  await loadProductsFetch();
-
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    });
-  });
+  try{
+    // throw 'error1';
+    
+    await loadProductsFetch();
+  } catch(error) {
+    console.log('unexpected error. Please try again later');
+  }
   
   renderOrderSummary();
   renderPaymentSummary();
