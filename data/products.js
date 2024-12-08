@@ -74,10 +74,6 @@ export function loadProductsFetch() {
   });
   return promise;
 }
-// loadProductsFetch().then(() => {
-//   console.log('next');
-// });
-
 
 export function loadProducts(func) {
   const xhr = new XMLHttpRequest();
